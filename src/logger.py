@@ -137,14 +137,20 @@ class Logger:
                 file.close()
             except Exception as e:
                 current_toggle_file_logging = self.toggle_file_logging
+                current_toggle_db_logging = self.toggle_db_logging
                 self.set_toggle_file_logging(False)
+                self.set_toggle_db_logging(False)
                 self.fatal("An error occured... %s" % str(e))
                 self.set_toggle_file_logging(current_toggle_file_logging)
+                self.set_toggle_db_logging(current_toggle_db_logging)
         else:
             current_toggle_file_logging = self.toggle_file_logging
+            current_toggle_db_logging = self.toggle_db_logging
             self.set_toggle_file_logging(False)
+            self.set_toggle_db_logging(False)
             self.fatal("File Path for Logger is Not Valid!")
             self.set_toggle_file_logging(current_toggle_file_logging)
+            self.set_toggle_db_logging(current_toggle_db_logging)
 
     def __log_db(self, timestamp, message, header):
         if self.conn is not None and self.cursor is not None:
